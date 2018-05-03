@@ -17,7 +17,7 @@ const items = [];
 
 file.forEach(item => {
   items.push({
-    id: item[ 0 ],
+    id: item[ 0 ] - 1,
     size: item[ 1 ],
     value: item[ 2 ],
     valuePerSize: item[ 2 ] / item[ 1 ]
@@ -32,17 +32,17 @@ function fillKnapsack(items, knapsackSize) {
         size: 0,
         chosen: []
       };
-    } else if (items[ id - 1 ].size > size) {
+    } else if (items[ id ].size > size) {
       return auditionItem(id - 1, size);
     } else {
       let r0 = auditionItem(id - 1, size);
-      let r1 = auditionItem(id - 1, size - items[ id - 1 ].size);
-      r1.value += items[ id - 1 ].value;
+      let r1 = auditionItem(id - 1, size - items[ id ].size);
+      r1.value += items[ id ].value;
       if (r0.value > r1.value) {
         return r0;
       } else {
-        r1.size += items[ id - 1 ].size;
-        r1.chosen = r1.chosen.concat(id - 1);
+        r1.size += items[ id ].size;
+        r1.chosen = r1.chosen.concat(id);
         return r1;
       }
     }
@@ -54,4 +54,3 @@ function fillKnapsack(items, knapsackSize) {
 const result = fillKnapsack(items, knapsackSize);
 
 console.log(result);
-console.log(items);

@@ -26,15 +26,25 @@ file.forEach(item => {
 
 function fillKnapsack(items, knapsackSize) {
   function auditionItem(id, size) {
-    if (id == 0 || size == 0) {
-      return 0;
+    if (id == 0) {
+      return {
+        value: 0,
+        size: 0,
+        chosen: []
+      };
     } else if (items[ id - 1 ].size > size) {
       return auditionItem(id - 1, size);
     } else {
-      return Math.max(
-        auditionItem(id - 1, size),
-        auditionItem(id - 1, size - items[ id - 1 ].size) + items[ id - 1 ].value
-      );
+      let r0 = auditionItem(id - 1, size);
+      let r1 = auditionItem(id - 1, size - items[ id - 1 ].size);
+      r1.value += items[ id - 1 ].value;
+      if (r0.value > r1.value) {
+        return r0;
+      } else {
+        r1.size += items[ id - 1 ].size;
+        r1.chosen = r1.chosen.concat(id - 1);
+        return r1;
+      }
     }
   }
 
@@ -44,3 +54,4 @@ function fillKnapsack(items, knapsackSize) {
 const result = fillKnapsack(items, knapsackSize);
 
 console.log(result);
+console.log(items);

@@ -24,26 +24,23 @@ file.forEach(item => {
   });
 });
 
-// items.sort((a, b) => b.valuePerSize - a.valuePerSize);
+function fillKnapsack(items, knapsackSize) {
+  function auditionItem(id, size) {
+    if (id == 0 || size == 0) {
+      return 0;
+    } else if (items[ id - 1 ].size > size) {
+      return auditionItem(id - 1, size);
+    } else {
+      return Math.max(
+        auditionItem(id - 1, size),
+        auditionItem(id - 1, size - items[ id - 1 ].size) + items[ id - 1 ].value
+      );
+    }
+  }
 
-// const knapsack = {
-//   maxSize: knapsackSize,
-//   currentSize: 0,
-//   totalValue: 0,
-//   items: []
-// };
+  return auditionItem(items.length - 1, knapsackSize);
+}
 
-// items.forEach((item, i) => {
-//   item = items[ i ];
-//   if (
-//     knapsack.currentSize < knapsack.maxSize &&
-//     knapsack.currentSize + item.size <= knapsack.maxSize
-//   ) {
-//     knapsack.items.push(item);
-//     knapsack.currentSize += item.size;
-//     knapsack.totalValue += item.value;
-//   }
-// });
+const result = fillKnapsack(items, knapsackSize);
 
-// console.log('KNAPSACK:\n', knapsack);
-
+console.log(result);

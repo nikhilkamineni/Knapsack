@@ -24,26 +24,26 @@ file.forEach(item => {
   });
 });
 
-items.sort((a, b) => b.valuePerSize - a.valuePerSize);
+// items.sort((a, b) => b.valuePerSize - a.valuePerSize);
 
-const knapsack = {
-  maxSize: knapsackSize,
-  currentSize: 0,
-  totalValue: 0,
-  items: []
-};
+// const knapsack = {
+//   maxSize: knapsackSize,
+//   currentSize: 0,
+//   totalValue: 0,
+//   items: []
+// };
 
-items.forEach((item, i) => {
-  item = items[ i ];
-  if (
-    knapsack.currentSize < knapsack.maxSize &&
-    knapsack.currentSize + item.size <= knapsack.maxSize
-  ) {
-    knapsack.items.push(item);
-    knapsack.currentSize += item.size;
-    knapsack.totalValue += item.value;
-  }
-});
+// items.forEach((item, i) => {
+//   item = items[ i ];
+//   if (
+//     knapsack.currentSize < knapsack.maxSize &&
+//     knapsack.currentSize + item.size <= knapsack.maxSize
+//   ) {
+//     knapsack.items.push(item);
+//     knapsack.currentSize += item.size;
+//     knapsack.totalValue += item.value;
+//   }
+// });
 
-console.log('KNAPSACK:\n', knapsack);
+// console.log('KNAPSACK:\n', knapsack);
 
